@@ -1,3 +1,4 @@
+const { TIMEOUT } = require('dns');
 const express = require('express');
 const puppeteer = require('puppeteer');
 const stream = require('stream')
@@ -42,7 +43,11 @@ app.post('/', async (req, res) => {
       try {
         const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         const page = await browser.newPage();
-        await page.goto(url, { waitUntil: 'load' });
+        await page.goto(url, { waitUntil: 'networkidle0' });
+        await page.evaluate(() => {
+          window.scrollBy(0, window.innerHeight);
+        })
+        await TIMEOUT(5000);
         const screenshot = await page.screenshot({
           fullPage: req.body.fullPage ? true : false,
           type: `${req.body.fileType}`,
@@ -68,4 +73,4 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.listen(process.env.PORT || 3000, () => console.log("Started app at port 3000"));
+app.listen(process.env.PORT || 3000, () => console.log("Started app"));
