@@ -1,0 +1,35 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="blogs content">
+      <div class="create-blog content">
+        <form action="/" method="POST">
+          <label for="url">Enter URL:</label>
+          <input type="text" id="url" name="url" required />
+          <div>
+            
+            <button>Download</button>
+            
+            <label class="container">Take full page screenshot  
+              <input type="checkbox" checked="checked" name="fullPage" id = "fullPage" value="checked">
+              <span class="checkmark"></span>
+            </label>
+              
+            <label for="resolution">Choose a Resolution:</label>
+            <select id="resolution" name="resolution">
+              <option value="fullhd">1920 x 1080</option>
+              <option value="hd">1280 × 720</option>
+            </select>
+            <label for="fileType">Output file type:</label>
+            <select id="fileType" name="fileType">
+              <option value="jpeg">jpeg</option>
+              <option value="png">png</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>
