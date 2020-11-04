@@ -42,7 +42,7 @@ app.post('/', async (req, res) => {
       try {
         const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         const page = await browser.newPage();
-        await page.goto(url, { waitUntil: 'networkidle0' });
+        await page.goto(url, { waitUntil: 'domcontentloaded' });
         const screenshot = await page.screenshot({
           fullPage: req.body.fullPage ? true : false,
           type: `${req.body.fileType}`,
