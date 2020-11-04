@@ -47,7 +47,7 @@ app.post('/', async (req, res) => {
         await page.evaluate(() => {
           window.scrollBy(0, window.innerHeight);
         })
-        await TIMEOUT(5000);
+        await timeout(5000)
         const screenshot = await page.screenshot({
           fullPage: req.body.fullPage ? true : false,
           type: `${req.body.fileType}`,
