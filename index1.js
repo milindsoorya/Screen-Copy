@@ -37,8 +37,9 @@ app.get('/',(req,res) => {
 })
 
 app.post('/', async (req, res) => {
-
+  try{
     async function doScreenCapture(url) {
+      try {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: 'networkidle0' });
@@ -51,8 +52,10 @@ app.post('/', async (req, res) => {
         });
         await browser.close();
         return screenshot;
+      } catch (e) {
+        console.log(e);
       }
-      
+    }
 
   const fileName = getString(req.body.url);
   const screenshot = await doScreenCapture(`${req.body.url}`)
@@ -61,6 +64,9 @@ app.post('/', async (req, res) => {
   res.set('Content-disposition', `attachment; filename=${fileName}.${req.body.fileType}`);
   res.set('Content-Type', 'image/${req.body.fileType}');
   return readStream.pipe(res);
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 app.listen(process.env.PORT || 3000, () => console.log("Started app at port 3000"));
