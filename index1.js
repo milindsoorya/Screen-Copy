@@ -48,7 +48,6 @@ app.post('/', async (req, res) => {
           type: `${req.body.fileType}`,
           width: getResolution(req.body.resolution)[0],
           height: getResolution(req.body.resolution)[1],
-          quality:100
         });
         await browser.close();
         return screenshot;
