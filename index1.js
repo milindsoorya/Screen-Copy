@@ -11,7 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-
 function getString(url) {
     url = url.replace(/(https?:\/\/)?(www.)?/i, "");
     if (url.indexOf("/") !== -1) {
@@ -43,10 +42,16 @@ app.post('/', async (req, res) => {
       try {
         const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         const page = await browser.newPage();
-        await page.goto(url, { waitUntil: 'networkidle0' });
+        await page.goto(url, { waitUntil: 'networkidle0' })
+        .catch((err) =>{
+          console.log(err)
+          res.render('index', { errormessage: 'Not a valid website please try again' });
+          browser.close();
+          return null;
+        })
         await page.evaluate(() => {
           window.scrollBy(0, window.innerHeight);
-        })
+        })  
         const screenshot = await page.screenshot({
           fullPage: req.body.fullPage ? true : false,
           type: `${req.body.fileType}`,
@@ -62,6 +67,9 @@ app.post('/', async (req, res) => {
 
   const fileName = getString(req.body.url);
   const screenshot = await doScreenCapture(`${req.body.url}`)
+  .catch((err) => {
+    console.log(err)
+  })
   let readStream = new stream.PassThrough();
   readStream.end(screenshot);
   res.set('Content-disposition', `attachment; filename=${fileName}.${req.body.fileType}`);
