@@ -6,7 +6,7 @@ const stream = require('stream')
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -19,7 +19,7 @@ function getString(url) {
     return url;
   }
 
-  function getResolution(type) {
+function getResolution(type) {
     if (type == "fullhd") {
       var IMG_WIDTH = 1920;
       var IMG_HEIGHT = 1080;
@@ -37,6 +37,7 @@ app.get('/',(req,res) => {
 })
 
 app.post('/', async (req, res) => {
+  console.log(req.body)
   try{
     async function doScreenCapture(url) {
       try {

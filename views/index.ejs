@@ -1,48 +1,93 @@
+<!DOCTYPE html>
 <html lang="en">
   <%- include('./partials/head.ejs') %>
-  <body>
-  
-    <%- include('./partials/nav.ejs') %>
+<body>
 
-    <div class="blogs content">
-      <div class="create-blog content">  
-        <form action="/" method="POST">
+  <%- include('./partials/nav.ejs') %>
 
-          <div class="url_download flex-column">
-            
-              <div class="url_download">
-                <div class="input-container">
-                <input type="text" id="url" name="url" placeholder="Enter the URL.." required />
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h1>Capture any websites</h1>
+          <h2></h2>
+          <div class="d-flex">
+
+            <form action="/" method="post">
+              <div class="form-group">
+                  <div class="form-inline">
+                  <input type="text" class="form-control" id="url" name="url" placeholder="Enter the URL..." required>
+                  <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                
+                <% if(typeof errormessage !== 'undefined') { %>
+                  <p class="warning"><%= errormessage %></p> 
+                <% } %>
+                <button type="submit" class="button">Download</button>
                 </div>
-                <button type="submit">Download</button>
-            </div>
-            
-      </div>
-      
-      <% if(typeof errormessage !== 'undefined') { %>
-        <p class="warning"><%= errormessage %></p> 
-    <% } %>
+              </div>
+              <h3></h3>
+              
+              
+              <div class="form-group row">
+               
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="fullPage" id = "fullPage">
+                    <label class="form-check-label" for="fullPage">
+                      Take full page screenshot
+                    </label>
+                  </div>
+                </div>
 
-          <div>
-            <label class="container">Take full page screenshot  
-              <input type="checkbox" checked="checked" name="fullPage" id = "fullPage" value="checked">
-              <span class="checkmark"></span>
-            </label>
-            <label for="fileType">Output file type:</label>
-            <select id="fileType" name="fileType">
-              <option value="jpeg">jpeg</option>
-              <option value="png">png</option>
-            </select>
-            <label for="resolution">Choose a Resolution:</label>
-            <select id="resolution" name="resolution">
-              <option value="fullhd">1920 x 1080</option>
-              <option value="hd">1280 × 720</option>
-            </select>
-          </div>
-        </form>
+              </div>
+
+              
+
+              <h3></h3>
+              <label class="radio-inline control-label">Resolution</label>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="fullhd" name="resolution" value="fullhd" checked>
+                <label class="custom-control-label" for="fullhd" >Full Hd</label>
+              </div>
+              
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="hd" value="hd" name="resolution">
+                <label class="custom-control-label" for="hd">Hd</label>
+              </div>
+
+
+              <h3></h3>
+              <label class="radio-inline control-label">File format</label>  
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="png" name="fileType" value="png" checked>
+                <label class="custom-control-label" for="png" >png</label>
+              </div>
+              
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="jpeg" value="jpeg" name="fileType">
+                <label class="custom-control-label" for="jpeg">jpeg</label>
+              </div>
+
+    
+
+            </form>
+            </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img">
+          <img src="/img/hero-img.png" class="img-fluid animated" alt="">
+        </div>
       </div>
     </div>
-    <%- include('./partials/footer.ejs') %>
-  
-  </body>
+    
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+  </main><!-- End #main -->
+  <%- include('./partials/footer.ejs') %>
+</body>
+
 </html>
