@@ -20,12 +20,13 @@
                   <div class="form-inline">
                   <input type="text" class="form-control" id="url" name="url" placeholder="Enter the URL..." required>
                   <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                
-                <% if(typeof errormessage !== 'undefined') { %>
-                  <p class="warning"><%= errormessage %></p> 
-                <% } %>
                 <button type="submit" class="button">Download</button>
                 </div>
+                <h3></h3>
+                <% if(typeof errormessage !== 'undefined') { %>
+                  <p class="text-warning"><%= errormessage %></p>
+               
+                <% } %>
               </div>
               <h3></h3>
               
