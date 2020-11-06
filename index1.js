@@ -50,9 +50,9 @@ app.post('/', async (req, res) => {
           browser.close();
           return null;
         })
-        await page.evaluate(() => {
-          window.scrollBy(0, window.innerHeight);
-        })  
+        // await page.evaluate(() => {
+        //   window.scrollBy(0, window.innerHeight);
+        // })  
         const screenshot = await page.screenshot({
           fullPage: req.body.fullPage ? true : false,
           type: `${req.body.fileType}`,
